@@ -17,8 +17,8 @@ var camera,
         onMouseDownMouseY = 0,
         onMouseDownLon = 0,
         onMouseDownLat = 0,
-        width = 1440, // int || window.innerWidth
-        height = 650, // int || window.innerHeight
+        width = window.innerWidth,
+        height = window.innerHeight,
         ratio = width / height;
 var texture = THREE.ImageUtils.loadTexture('img/spherical_texture.jpg', new THREE.UVMapping(), function() {
     init();
@@ -40,10 +40,10 @@ function init() {
     onWindowResized(null);
 }
 function onWindowResized(event) {
-//    renderer.setSize(window.innerWidth, window.innerHeight);
-//    camera.projectionMatrix.makePerspective(fov, window.innerWidth / window.innerHeight, 1, 1100);
-    renderer.setSize(width, height);
-    camera.projectionMatrix.makePerspective(fov, ratio, 1, 1100);
+   renderer.setSize(window.innerWidth, window.innerHeight);
+   camera.projectionMatrix.makePerspective(fov, window.innerWidth / window.innerHeight, 1, 1100);
+    // renderer.setSize(width, height);
+    // camera.projectionMatrix.makePerspective(fov, ratio, 1, 1100);
 }
 function onDocumentMouseDown(event) {
     event.preventDefault();
@@ -86,7 +86,7 @@ function animate() {
 }
 function render() {
     if (isUserInteracting === false) {
-        lon += .05;
+        lon -= .05;
     }
     lat = Math.max(-85, Math.min(85, lat));
     phi = THREE.Math.degToRad(90 - lat);
