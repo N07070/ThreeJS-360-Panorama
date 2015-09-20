@@ -4,6 +4,8 @@
         <title>ThreeJS 360 Panorama</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
         <style>
             html{
                 margin: 0;
@@ -58,12 +60,19 @@
                 text-align: left;
                 border: 3px double #ddd;
             }
+            #fullscreen {
+                display: block;
+                position: absolute;
+                padding: 20px;
+                bottom: 20px;
+                left: 20px;
+            }
 
         </style>
     </head>
     <body>
         <div id="demo">
-            <div id="log"></div>
+            <div id="fullscreen"><button onclick="requestFullScreen()"><i class="material-icons">settings_overscan</i></button> </div>
         </div>
         <!--    Load three.js from CDN
                 <script src="http://threejs.org/build/three.min.js"></script>

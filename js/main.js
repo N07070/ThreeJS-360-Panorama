@@ -94,11 +94,30 @@ function render() {
     camera.position.x = 100 * Math.sin(phi) * Math.cos(theta);
     camera.position.y = 100 * Math.cos(phi);
     camera.position.z = 100 * Math.sin(phi) * Math.sin(theta);
-    var log = ("x: " + camera.position.x);
-    log = log + ("<br/>y: " + camera.position.y);
-    log = log + ("<br/>z: " + camera.position.z);
-    log = log + ("<br/>fov: " + fov);
-    document.getElementById('log').innerHTML = log;
     camera.lookAt(scene.position);
     renderer.render(scene, camera);
+}
+
+function requestFullScreen() {
+
+  var el = document.body;
+
+  // Supports most browsers and their versions.
+  var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen
+  || el.mozRequestFullScreen || el.msRequestFullScreen;
+
+  if (requestMethod) {
+
+    // Native full screen.
+    requestMethod.call(el);
+
+  } else if (typeof window.ActiveXObject !== "undefined") {
+
+    // Older IE.
+    var wscript = new ActiveXObject("WScript.Shell");
+
+    if (wscript !== null) {
+      wscript.SendKeys("{F11}");
+    }
+  }
 }
