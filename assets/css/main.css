@@ -1,0 +1,61 @@
+html{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+body {
+    font-size: 18px;
+    line-height: 1.5em;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    padding: 0;
+    display: inline-block;
+    overflow-x: hidden;
+}
+a{
+    color: #528CE0;
+}
+#demo{
+    /* comment for fixed dimentsions */
+    position: relative;
+    width: 100%; /* 2.5*/
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    cursor: grab;
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+#demo:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+#log{
+    display: none;
+}
+#log:hover{
+    display: block;
+    position: absolute;
+    background: #fff;
+    padding: 20px;
+    bottom: 20px;
+    left: 20px;
+    width: 150px;
+    font: normal 12px/18px Monospace, Arial, Helvetical, sans-serif;
+    text-align: left;
+    border: 3px double #ddd;
+}
+.settings {
+    display: inline-block;
+    list-style: none;
+    position: absolute;
+    padding: 20px;
+    bottom: 20px;
+    left: 20px;
+}

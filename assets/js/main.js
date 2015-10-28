@@ -1,29 +1,45 @@
+$('#file-input').change(function(e) {
+    var file = e.target.files[0],
+        imageType = /image.*/;
+
+    if (!file.type.match(imageType))
+        return;
+
+
+    var reader = new FileReader();
+    reader.onload = function(e){derp(e.target.result)};
+    reader.readAsDataURL(file);
+});
+
+function derp(image_data){
 "use strict";
 var camera,
-        scene,
-        element = document.getElementById('demo'), // Inject scene into this
-        renderer,
-        onPointerDownPointerX,
-        onPointerDownPointerY,
-        onPointerDownLon,
-        onPointerDownLat,
-        fov = 70, // Field of View
-        isUserInteracting = false,
-        lon = 0,
-        lat = 0,
-        phi = 0,
-        theta = 0,
-        onMouseDownMouseX = 0,
-        onMouseDownMouseY = 0,
-        onMouseDownLon = 0,
-        onMouseDownLat = 0,
-        width = window.innerWidth,
-        height = window.innerHeight,
-        ratio = width / height;
-var texture = THREE.ImageUtils.loadTexture('img/spherical_texture.jpg', new THREE.UVMapping(), function() {
+    scene,
+    element = document.getElementById('demo'), // Inject scene into this
+    renderer,
+    onPointerDownPointerX,
+    onPointerDownPointerY,
+    onPointerDownLon,
+    onPointerDownLat,
+    fov = 70, // Field of View
+    isUserInteracting = false,
+    lon = 0,
+    lat = 0,
+    phi = 0,
+    theta = 0,
+    onMouseDownMouseX = 0,
+    onMouseDownMouseY = 0,
+    onMouseDownLon = 0,
+    onMouseDownLat = 0,
+    width = window.innerWidth,
+    height = window.innerHeight,
+    ratio = width / height;
+
+var texture = THREE.ImageUtils.loadTexture( image_data , new THREE.UVMapping(), function() {
     init();
     animate();
 });
+
 function init() {
     camera = new THREE.PerspectiveCamera(fov, ratio, 1, 1000);
     scene = new THREE.Scene();
@@ -80,10 +96,12 @@ function onDocumentMouseWheel(event) {
     }
     camera.projectionMatrix.makePerspective(fov, ratio, 1, 1100);
 }
+
 function animate() {
     requestAnimationFrame(animate);
     render();
 }
+
 function render() {
     if (isUserInteracting === false) {
         lon -= .05;
@@ -98,6 +116,7 @@ function render() {
     renderer.render(scene, camera);
 }
 
+// Used to pass the image in fullscreen
 function requestFullScreen() {
 
   var el = document.body;
@@ -120,4 +139,5 @@ function requestFullScreen() {
       wscript.SendKeys("{F11}");
     }
   }
+}
 }
