@@ -1,3 +1,6 @@
+// When the input field value changes ( ie, when you select an image), it's
+// data is transfered to the function. In place of a relative file name, a
+// base64 data is used.
 $('#file-input').change(function(e) {
     var file = e.target.files[0],
         imageType = /image.*/;
@@ -5,13 +8,18 @@ $('#file-input').change(function(e) {
     if (!file.type.match(imageType))
         return;
 
-
     var reader = new FileReader();
-    reader.onload = function(e){derp(e.target.result)};
+    // Set an async event : what to do when we're done loading the image.
+    // In this case : initate the show !
+    reader.onload = function(e){
+        $("p").remove(); // Remove the card with the upload stuff
+        image_sphere(e.target.result);
+    };
     reader.readAsDataURL(file);
 });
 
-function derp(image_data){
+// All the code to create the sphere.
+function image_sphere(image_data){
 "use strict";
 var camera,
     scene,
@@ -116,6 +124,8 @@ function render() {
     renderer.render(scene, camera);
 }
 
+} // End of the image_sphere function
+
 // Used to pass the image in fullscreen
 function requestFullScreen() {
 
@@ -139,5 +149,4 @@ function requestFullScreen() {
       wscript.SendKeys("{F11}");
     }
   }
-}
 }
